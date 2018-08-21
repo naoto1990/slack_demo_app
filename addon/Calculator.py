@@ -5,10 +5,11 @@ class Calculator:
     """
 
     def multiply(self, nums: list):
+        """
+        """
         result = 1
 
-        for i in nums:
-            result = result * nums[i]
+        for num in nums:
+            result = result * num
 
         return result
-            
