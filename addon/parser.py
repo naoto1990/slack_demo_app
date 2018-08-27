@@ -16,6 +16,9 @@ class Parser:
         num_str = input_text.split()
         result_list = []
         for num in num_str:
-            result_list.append(int(num))
+            try:
+                result_list.append(int(num))
+            except ValueError:
+                raise ValueError
 
         return result_list

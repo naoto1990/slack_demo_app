@@ -30,9 +30,13 @@ def create_app(test_config=None):
                 parser = Parser()
                 calculator = Calculator()
 
-                num_list = parser.parse_request(input_text)
-                result = calculator.multiply(num_list)
+                try:
+                    num_list = parser.parse_request(input_text)
+                    result = calculator.multiply(num_list)
 
-            return str(result)
-            
+                    return str(result)
+
+                except ValueError:
+                    return 'Give me number please!'
+
     return app
