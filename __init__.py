@@ -1,12 +1,9 @@
 import os
-# import dotenv
 from flask import Flask, request, jsonify
 
 from slack_demo.addon.calculator import Calculator
 from slack_demo.addon.parser import Parser
 
-# dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
-# dotenv.load_dotenv(dotenv_path)
 verification_token = os.environ['VERIFICATION_TOKEN']
 
 
