@@ -20,23 +20,21 @@ def create_app(test_config=None):
         return 'Hello, World!'
 
 
-    @app.route('/multiply', methods=['POST'])
-    def multiply():
+    @app.route('/calc', methods=['POST'])
+    def calc():
         if request.method == 'POST':
             if request.form['token'] == verification_token:
 
                 input_text = request.form['text']
 
-                parser = Parser()
-                calculator = Calculator()
-
                 try:
-                    num_list = parser.parse_request(input_text)
-                    result = calculator.multiply(num_list)
-
+                    result = eval(input_text)
                     return str(result)
 
-                except ValueError:
-                    return 'Give me number please!'
+                except SyntaxError:
+                    return 'Give me proper request please!'
+
+                except ZeroDivisionError:
+                    return 'You can not devide by 0!'
 
     return app
