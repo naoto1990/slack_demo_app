@@ -22,19 +22,17 @@ def create_app(test_config=None):
 
     @app.route('/calc', methods=['POST'])
     def calc():
-        if request.method == 'POST':
-            if request.form['token'] == verification_token:
+        if request.method == 'POST' and request.form['token'] == verification_token:
+            input_text = request.form['text']
 
-                input_text = request.form['text']
+            try:
+                result = eval(input_text)
+                return str(result)
 
-                try:
-                    result = eval(input_text)
-                    return str(result)
+            except SyntaxError:
+                return 'Give me proper request please!'
 
-                except SyntaxError:
-                    return 'Give me proper request please!'
-
-                except ZeroDivisionError:
-                    return 'You can not devide by 0!'
+            except ZeroDivisionError:
+                return 'You can not devide by 0!'
 
     return app
