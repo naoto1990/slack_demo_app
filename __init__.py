@@ -1,8 +1,8 @@
 import os
 from flask import Flask, request, jsonify
 
-from slack_demo.addon.calculator import Calculator
-from slack_demo.addon.parser import Parser
+from slash_calc.addon.calculator import Calculator
+from slash_calc.addon.parser import Parser
 
 verification_token = os.environ['VERIFICATION_TOKEN']
 
