@@ -1,5 +1,6 @@
+from flask import Flask, request, Response, jsonify
 import os
-from flask import Flask, request, jsonify
+import json
 
 from slash_calc.addon.calculator import Calculator
 from slash_calc.addon.parser import Parser
@@ -22,9 +23,20 @@ def create_app(test_config=None):
         if request.method == 'POST' and request.form['token'] == verification_token:
             input_text = request.form['text']
 
+            response = {
+                "text": input_text,
+                "attachments": [
+                    {
+                        "text":""
+                    }
+                ]
+            }
+
             try:
                 result = eval(input_text)
-                return str(result)
+                response["attachments"][0]["text"] = "= " + str(result)
+
+                return Response(json.dumps(response), mimetype='application/json')
 
             except SyntaxError:
                 return 'Give me proper request please!'
